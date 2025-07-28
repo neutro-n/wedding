@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZUZANNA & JAKUB - Menu Weselne</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: linear-gradient(135deg, #f8f4f0 0%, #f0e6d2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="25" cy="25" r="1" fill="%23d4af37" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23d4af37" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="%23d4af37" opacity="0.15"/><circle cx="10" cy="90" r="0.5" fill="%23d4af37" opacity="0.15"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 15px 35px rgba(184, 159, 134, 0.2);
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .menu-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            color: #d4af37;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .couple-names {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5em;
+            color: #5d4e37;
+            font-weight: 700;
+            letter-spacing: 4px;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(93, 78, 55, 0.1);
+        }
+
+        .wedding-date {
+            font-size: 1.8em;
+            color: #8b7355;
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        .decorative-line {
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            margin: 30px auto;
+            position: relative;
+        }
+
+        .decorative-line::before,
+        .decorative-line::after {
+            content: '❋';
+            position: absolute;
+            top: -8px;
+            color: #d4af37;
+            font-size: 1.2em;
+        }
+
+        .decorative-line::before {
+            left: -20px;
+        }
+
+        .decorative-line::after {
+            right: -20px;
+        }
+
+        .menu-section {
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(240, 230, 210, 0.3);
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .menu-section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(184, 159, 134, 0.15);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            color: #5d4e37;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background: #d4af37;
+        }
+
+        .dish-item {
+            padding: 15px 0;
+            border-bottom: 1px dashed rgba(139, 115, 85, 0.3);
+            color: #5d4e37;
+            font-size: 1.3em;
+            font-weight: 400;
+            line-height: 1.6;
+            text-align: center;
+            transition: color 0.3s ease;
+        }
+
+        .dish-item:last-child {
+            border-bottom: none;
+        }
+
+        .dish-item:hover {
+            color: #3d2f1f;
+        }
+
+        .main-course {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .dessert {
+            background: rgba(212, 175, 55, 0.15);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        .dinner-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .dinner-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .dinner-card:hover {
+            border-color: #d4af37;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
+        }
+
+        .dinner-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8em;
+            color: #d4af37;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .dinner-description {
+            color: #5d4e37;
+            font-size: 1.2em;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        .footer-decoration {
+            text-align: center;
+            margin-top: 50px;
+            color: #d4af37;
+            font-size: 2em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 30px;
+            }
+            
+            .couple-names {
+                font-size: 2.5em;
+                letter-spacing: 2px;
+            }
+
+            .menu-title {
+                font-size: 2em;
+                letter-spacing: 2px;
+            }
+
+            .wedding-date {
+                font-size: 1.4em;
+            }
+
+            .section-title {
+                font-size: 1.8em;
+            }
+
+            .dish-item {
+                font-size: 1.1em;
+            }
+
+            .dinner-options {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+
+            .couple-names {
+                font-size: 2em;
+                letter-spacing: 1px;
+            }
+
+            .menu-title {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="menu-title">Menu Weselne</h1>
+            <h2 class="couple-names">ZUZANNA & JAKUB</h2>
+            <p class="wedding-date">02.08.2025</p>
+            <div class="decorative-line"></div>
+        </div>
+
+        <div class="menu-section">
+            <h3 class="section-title">ZUPA</h3>
+            <div class="dish-item">Tradycyjny rosół z makaronem</div>
+        </div>
+
+        <div class="menu-section main-course">
+            <h3 class="section-title">DANIE GŁÓWNE</h3>
+            <div class="dish-item">Ziemniaki lub Frytki</div>
+            <div class="dish-item">Filet w płatkach kukurydzianych</div>
+            <div class="dish-item">Kotlet de volaille</div>
+            <div class="dish-item">Kieszonki z pieczarkami</div>
+            <div class="dish-item">Karkówka duszona w sosie</div>
+        </div>
+
+        <div class="menu-section dessert">
+            <h3 class="section-title">DESER</h3>
+            <div class="dish-item">Tort Weselny</div>
+        </div>
+
+        <div class="menu-section">
+            <h3 class="section-title">KOLACJE</h3>
+            <div class="dinner-options">
+                <div class="dinner-card">
+                    <div class="dinner-number">KOLACJA 1</div>
+                    <div class="dinner-description">
+                        Medaliony z polędwiczki wieprzowej z kluskami śląskimi i czerwoną kapustą
+                    </div>
+                </div>
+                <div class="dinner-card">
+                    <div class="dinner-number">KOLACJA 2</div>
+                    <div class="dinner-description">
+                        Filet pod pierzynką z ryżem warzywnym i surówką z marchwii
+                    </div>
+                </div>
+                <div class="dinner-card">
+                    <div class="dinner-number">KOLACJA 3</div>
+                    <div class="dinner-description">
+                        Kwaśnica z żeberkiem
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-decoration">
+            ❋ ❋ ❋
+        </div>
+    </div>
+</body>
+</html>

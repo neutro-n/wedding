@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZUZANNA & JAKUB</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: #f8f4f0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .main-container {
+            text-align: center;
+            font-size: 14px;
+            max-width: 600px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 60px 40px;
+            box-shadow: 0 8px 25px rgba(184, 159, 134, 0.15);
+            border: 1px solid rgba(206, 184, 159, 0.2);
+        }
+
+        .welcome-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #5d4e37;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .welcome-text::before {
+            content: '';
+            position: absolute;
+            left: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.5em;
+            color: #d4af37;
+        }
+
+        .welcome-text::after {
+            content: '';
+            position: absolute;
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.5em;
+            color: #d4af37;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            color: #7a6a52;
+            margin-bottom: 50px;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 50px;
+            font-size: 1.4em;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            letter-spacing: 1px;
+            min-width: 280px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-button:hover::before {
+            left: 100%;
+        }
+
+        .songs-button {
+            background: #d4af37;
+            color: white;
+            border: 2px solid #d4af37;
+        }
+
+        .songs-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .menu-button {
+            background: #d4af37;
+            color: white;
+            border: 2px solid #d4af37;
+        }
+
+        .menu-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .decoration {
+            margin: 40px 0 20px 0;
+            font-size: 2em;
+            color: #d4af37;
+            letter-spacing: 10px;
+        }
+
+        .date-info {
+            font-size: 1.2em;
+            color: #7a6a52;
+            font-style: italic;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 600px) {
+            .main-container {
+                padding: 40px 25px;
+                margin: 10px;
+            }
+            
+            .welcome-text {
+                font-size: 2.5em;
+                letter-spacing: 1px;
+            }
+
+            .welcome-text::before,
+            .welcome-text::after {
+                display: none;
+            }
+            
+            .subtitle {
+                font-size: 1.3em;
+                margin-bottom: 40px;
+            }
+
+            .nav-button {
+                padding: 18px 40px;
+                font-size: 1.2em;
+                min-width: 250px;
+            }
+
+            .decoration {
+                margin: 30px 0 15px 0;
+                font-size: 1.5em;
+                letter-spacing: 8px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .nav-buttons {
+                flex-direction: row;
+                gap: 30px;
+            }
+
+            .nav-button {
+                min-width: 220px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <h1 class="welcome-text">ZUZANNA & JAKUB</h1>
+        <p class="subtitle">Celebruj z nami</p>
+        
+        <div class="decoration">❦ ❦ ❦</div>
+        
+        <nav class="nav-buttons">
+            <a href="spiewnik.html" class="nav-button songs-button">
+                Śpiewnik
+            </a>
+            <a href="menu.html" class="nav-button menu-button">
+                Menu
+            </a>
+        </nav>
+        
+        <p class="date-info">A day to remember</p>
+    </div>
+
+    <script>
+        // Buttons are now ready for navigation
+        // You can add href attributes to link to actual pages
+    </script>
+</body>
+</html>
