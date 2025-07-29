@@ -43,6 +43,7 @@
             margin-bottom: 15px;
             letter-spacing: 2px;
             position: relative;
+            white-space: nowrap;
         }
 
         .welcome-text::before {
@@ -156,8 +157,11 @@
             }
             
             .welcome-text {
-                font-size: 2.5em;
+                font-size: 2.2em;
                 letter-spacing: 1px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             .welcome-text::before,
@@ -180,6 +184,12 @@
                 margin: 30px 0 15px 0;
                 font-size: 1.5em;
                 letter-spacing: 8px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .welcome-text {
+                font-size: 1.8em;
             }
         }
 
