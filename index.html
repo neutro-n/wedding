@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZUZANNA & JAKUB</title>
+    <title>ZUZANNA & JAKUB - Śpiewnik</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500&display=swap');
         
@@ -17,228 +17,1044 @@
             font-family: 'Cormorant Garamond', serif;
             background: #f8f4f0;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             padding: 20px;
         }
 
-        .main-container {
-            text-align: center;
-            font-size: 14px;
-            max-width: 600px;
-            width: 100%;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            padding: 60px 40px;
+            border-radius: 25px;
+            padding: 40px;
             box-shadow: 0 8px 25px rgba(184, 159, 134, 0.15);
             border: 1px solid rgba(206, 184, 159, 0.2);
         }
 
-        .welcome-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5em;
-            font-weight: 700;
+        h1 {
+            text-align: center;
             color: #5d4e37;
-            margin-bottom: 15px;
+            margin-bottom: 40px;
+            font-size: 3em;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
             letter-spacing: 2px;
             position: relative;
-            white-space: nowrap;
         }
 
-        .welcome-text::before {
+        h1::after {
             content: '';
             position: absolute;
             left: -60px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 0.5em;
+            font-size: 0.6em;
             color: #d4af37;
         }
 
-        .welcome-text::after {
+        h1::before {
             content: '';
             position: absolute;
             right: -60px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 0.5em;
+            font-size: 0.6em;
             color: #d4af37;
         }
 
-        .subtitle {
-            font-size: 1.5em;
-            color: #7a6a52;
-            margin-bottom: 50px;
-            font-weight: 400;
-            letter-spacing: 1px;
+        .song-list {
+            list-style: none;
+            display: grid;
+            gap: 15px;
         }
 
-        .nav-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .nav-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px 50px;
-            font-size: 1.4em;
-            font-family: 'Playfair Display', serif;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 25px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            letter-spacing: 1px;
-            min-width: 280px;
-            position: relative;
+        .song-item {
+            background: #ffffff;
+            border-radius: 20px;
             overflow: hidden;
+            box-shadow: 0 4px 12px rgba(184, 159, 134, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 2px solid rgba(93, 78, 55, 0.3);
         }
 
-        .nav-button::before {
-            content: '';
+        .song-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(184, 159, 134, 0.15);
+            border-color: rgba(93, 78, 55, 0.5);
+        }
+
+        .song-title {
+            padding: 25px 30px;
+            cursor: pointer;
+            font-size: 1.4em;
+            font-weight: 500;
+            color: #5d4e37;
+            font-family: 'Playfair Display', serif;
+            background: #f0e6d2;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            position: relative;
+            letter-spacing: 0.5px;
+        }
+
+        .song-title:hover {
+            background: #e6d7bb;
+            color: #3d2f1f;
+        }
+
+        .song-title::after {
+            content: '◦';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .nav-button:hover::before {
-            left: 100%;
-        }
-
-        .songs-button {
-            background: #d4af37;
-            color: white;
-            border: 2px solid #d4af37;
-        }
-
-        .songs-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
-        }
-
-        .menu-button {
-            background: #d4af37;
-            color: white;
-            border: 2px solid #d4af37;
-        }
-
-        .menu-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
-        }
-
-        .decoration {
-            margin: 40px 0 20px 0;
-            font-size: 2em;
-            color: #d4af37;
-            letter-spacing: 10px;
-        }
-
-        .date-info {
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.2s ease, color 0.2s ease;
             font-size: 1.2em;
-            color: #7a6a52;
-            font-style: italic;
-            margin-top: 30px;
+            color: #d4af37;
         }
 
+        .song-item.active .song-title {
+            background: #d4af37;
+            color: white;
+        }
+
+        .song-item.active .song-title::after {
+            transform: translateY(-50%) rotate(90deg);
+            color: white;
+        }
+
+        .song-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: #ffffff;
+        }
+
+        .song-item.active .song-content {
+            max-height: none;
+        }
+
+        .song-text {
+            padding: 30px;
+            line-height: 1.8;
+            color: #5d4e37;
+            border-top: 1px solid rgba(206, 184, 159, 0.3);
+            font-size: 1.1em;
+            font-weight: 400;
+            text-align: center;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+
+        /* Better handling of line breaks */
+        .song-text br {
+            display: block;
+            margin: 0.5em 0;
+            content: "";
+        }
+
+        .back-btn {
+            display: none;
+            margin: 25px 0;
+            padding: 15px 35px;
+            background: #d4af37;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 500;
+            font-family: 'Playfair Display', serif;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Mobile optimizations */
         @media (max-width: 600px) {
-            .main-container {
-                padding: 40px 25px;
-                margin: 10px;
+            body {
+                padding: 10px;
             }
             
-            .welcome-text {
+            .container {
+                margin: 0;
+                padding: 20px;
+                border-radius: 15px;
+            }
+            
+            h1 {
                 font-size: 2.2em;
                 letter-spacing: 1px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
+                margin-bottom: 30px;
             }
 
-            .welcome-text::before,
-            .welcome-text::after {
+            h1::before,
+            h1::after {
                 display: none;
             }
             
-            .subtitle {
-                font-size: 1.3em;
-                margin-bottom: 40px;
-            }
-
-            .nav-button {
-                padding: 18px 40px;
+            .song-title {
+                padding: 20px 25px;
                 font-size: 1.2em;
-                min-width: 250px;
+                line-height: 1.3;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
             }
 
-            .decoration {
-                margin: 30px 0 15px 0;
-                font-size: 1.5em;
-                letter-spacing: 8px;
+            .song-title::after {
+                right: 20px;
             }
-        }
 
-        @media (max-width: 480px) {
-            .welcome-text {
-                font-size: 1.9em;
-                letter-spacing: 0.5px;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .welcome-text {
-                font-size: 1.7em;
-                letter-spacing: 0px;
+            .song-text {
+                padding: 20px;
+                font-size: 1em;
+                line-height: 1.6;
+                text-align: left;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
             }
             
-            .main-container {
-                padding: 30px 20px;
+            /* Better mobile text handling */
+            .song-text br {
+                display: block;
+                margin: 0.3em 0;
             }
         }
 
-        @media (min-width: 768px) {
-            .nav-buttons {
-                flex-direction: row;
-                gap: 30px;
+        /* Very small screens */
+        @media (max-width: 400px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 25px;
+            }
+            
+            .song-title {
+                padding: 15px 20px;
+                font-size: 1.1em;
             }
 
-            .nav-button {
-                min-width: 220px;
+            .song-title::after {
+                right: 15px;
+            }
+
+            .song-text {
+                padding: 15px;
+                font-size: 0.95em;
+                line-height: 1.5;
             }
         }
     </style>
 </head>
 <body>
-    <div class="main-container">
-        <h1 class="welcome-text">ZUZANNA & JAKUB</h1>
-        <p class="subtitle">Celebruj z nami</p>
+    <div class="container">
+        <h1>ZUZANNA & JAKUB</h1>
         
-        <div class="decoration">❦ ❦ ❦</div>
-        
-        <nav class="nav-buttons">
-            <a href="spiewnik.html" class="nav-button songs-button">
-                Śpiewnik
-            </a>
-            <a href="menu.html" class="nav-button menu-button">
-                Menu
-            </a>
-        </nav>
-        
-        <p class="date-info">A day to remember</p>
+        <ul class="song-list" id="songList">
+            <li class="song-item">
+                <div class="song-title">HEJ Z GÓRY Z GÓRY</div>
+                <div class="song-content">
+                    <div class="song-text">
+    Hej z góry z góry<br>
+    jadą mazury<br>
+    jedzie jedzie mazureczek<br>
+    wiezie wiezie mi wianeczek<br>
+    roz..(!)..rozmarynowy<br>
+    <br>
+    Przyjechał w nocy<br>
+    koło północy<br>
+    stuka puka w okieneczko<br>
+    otwórz otwórz panieneczko<br>
+    ko..(!)..koniom wody dać<br>
+    <br>
+    Jakże ja mam wstać<br>
+    koniom wody dać<br>
+    kiedy mama zakazała<br>
+    żebym chłopcom nie dawała<br>
+    trze..(!)..trzeba jej się bać<br>
+    <br>
+    A ty się nie bój<br>
+    siadaj na koniu<br>
+    pojedziemy w obce kraje<br>
+    tam są inne obyczaje<br>
+    ma..(!)malowany wóz<br>
+    <br>
+    Nocą jechali<br>
+    ludzie wołali<br>
+    co to, co to za dziewczyna<br>
+    co to, co to za jedyna<br>
+    je..(!).. jedzie z chłopcami<br>
+
+                    </div>
+                </div>
+            </li>
+            
+            <li class="song-item">
+                <div class="song-title">ZA GÓRAMI ZA LASAMI ZA DOLINAMI</div>
+                <div class="song-content">
+                    <div class="song-text">
+                        Za górami za lasami za dolinami<br>
+                        Pobili się dwaj górale ciupagami<br>
+                        <br>
+                        Hej górale nie bijta się<br>
+                        Ma góralka dwa warkocze podzielita się<br>
+                        Hej górale nie bijta się<br>
+                        Ma góralka dwa warkocze podzielita się<br>
+                        <br>
+                        Za górami za lasami za dolinami<br>
+                        Pobili się dwaj górale ciupagami<br>
+                        <br>
+                        Hej górale nie bijta się<br>
+                        Ma góralka dwoje oczu podzielita się<br>
+                        Hej górale nie bijta się<br>
+                        Ma góralka dwoje oczu podzielita się<br>
+                        <br>
+                        Za górami za lasami za dolinami<br>
+                        Pobili się dwaj górale ciupagami<br>
+                        <br>
+                        Hej górale nie bijta się<br>
+                        Ma góralka wielkie serce podzielita się<br>
+                        Hej górale nie bijta się<br>
+                        Ma góralka wielkie serce podzielita się
+                    </div>
+                </div>
+            </li>
+            
+            <li class="song-item">
+                <div class="song-title">REZERWA</div>
+                <div class="song-content">
+                    <div class="song-text">
+Godzina piąta, minut trzydzieści<br>
+Kiedy pobudka zagrała<br>
+Grupa rezerwy szła do cywila<br>
+Niejedna panna płakała.<br>
+<br>
+Niejednej pannie, żal się zrobiło<br>
+I serce z bólu zadrżało<br>
+Ze jej kochanek szedł do cywila<br>
+A jej się dziecko zostało<br>
+Ze jej kochanek szedł do cywila<br>
+A jej się dziecko zostało<br>
+<br>
+Na dworcu głównym, w mieście Włocławku<br>
+Wszystkie się panny zebrały<br>
+Z kamieniem w ręku, z dzieckiem na ręku<br>
+Na rezerwistów czekały<br>
+Z kamieniem w ręku, z dzieckiem na ręku<br>
+Na rezerwistów czekały<br>
+<br>
+Lecz to nie honor na rezerwisty<br>
+By na peronie z panną stać<br>
+Wsiadł do pociągu i trzasnął drzwiami<br>
+Tak się pożegnał z pannami<br>
+Wsiadł do pociągu i trzasnął drzwiami<br>
+tak się pożegnał z pannami<br>
+<br>
+Wsiadł do pociągu, usiadł przy oknie<br>
+A pociąg ruszył z łoskotem<br>
+A wszystkie panny głowę spuściły<br>
+Poszły do domu z powrotem<br>
+A wszystkie panny głowę spuściły<br>
+Poszły do domu z powrotem<br>
+<br>
+Nazajutrz rano poszły do sztabu<br>
+Pytać o adres miłego<br>
+Szef sztabu na to im odpowiedział<br>
+U nas nie było takiego<br>
+Szef sztabu na to im odpowiedział<br>
+U nas nie było takiego<br>
+<br>
+Poszły do domu, siadły przy piecu<br>
+I tak cichutko płakały<br>
+Synu ah synu, ojciec w cywilu<br>
+A jego adres nieznany<br>
+Synu ah synu, ojciec w cywilu<br>
+A jego adres nieznany<br>                    
+                    </div>
+                </div>
+            </li>
+            
+            <li class="song-item">
+                <div class="song-title">PRZEPIJEMY NASZEJ BABCI</div>
+                <div class="song-content">
+                    <div class="song-text">
+Przepijemy naszej babci domek cały<br>
+Domek cały, domek mały<br>
+I kalosze, i bambosze, i sandały<br>
+Jeszcze dziś, jeszcze dziś, jeszcze dziś<br>
+<br>
+Przepijemy naszej babci domek śliczny<br>
+Domek śliczny, domek śliczny<br>
+I zrobimy z tego domku dom publiczny<br>
+Jeszcze dziś, jeszcze dziś, jeszcze dziś<br>
+<br>
+Przepijemy naszej babci majty w kratę<br>
+Majty w kratę, majty w kratę<br>
+Takie duże barchanowe i włochate<br>
+Jeszcze dziś, jeszcze dziś, jeszcze dziś<br>
+<br>
+Przepijemy naszej babci pieska, kotka<br>
+Pieska, kotka, pieska, kotka<br>
+Pozostanie naszej babci tylko cnotka<br>
+Jeszcze dziś, jeszcze dziś, jeszcze dziś<br>
+<br>
+Przepijemy naszej babci złote zęby<br>
+Złote zęby, złote zęby<br>
+I zrobimy naszej babci pupę z gęby<br>
+Jeszcze dziś, jeszcze dziś, jeszcze dziś<br>
+<br>
+Przepijemy naszej babci ślubne łoże<br>
+Ślubne łoże, ślubne łoże<br>
+Po cóż babci, kiedy dziadek już nie może<br>
+Nic a nic, nic a nic, nic a nic<br>
+<br>
+Przepijemy naszej babci wszystko w domu<br>
+Wszystko w domu, wszystko w domu<br>
+Przepijemy naszą babcię po kryjomu<br>
+Jeszcze dziś, jeszcze dziś, jeszcze dziś<br>
+<br>
+Zabierzemy naszą babcię do Krakowa<br>
+Do Krakowa, do Krakowa<br>
+Niech zobaczy świata kawał stara krowa<br>
+Jeszcze dziś, jeszcze dziś, jeszcze dziś<br>
+                    </div>
+                </div>
+            </li>
+            
+            <li class="song-item">
+                <div class="song-title">SKRZYPECZKI</div>
+                <div class="song-content">
+                    <div class="song-text">
+Gdym się na świat narodziła<br>
+Matuś moja rzekła mi<br>
+Córuś moja córuś miła<br>
+Te skrzypeczki daję ci<br>
+Córuś moja córuś miła<br>
+Te skrzypeczki daję ci<br>
+<br>
+Te skrzypeczki rzecz nabyta<br>
+Byle komu nie daj grać<br>
+Do szesnastu latek życia<br>
+Nie pokazuj ich na świat<br>
+Do szesnastu latek życia<br>
+Nie pokazuj ich na świat<br>
+<br>
+Gdym szesnaście latek miała<br>
+To nieszczęście stało się<br>
+Ja skrzypeczki swe wyjęłam<br>
+By na świat pokazać je<br>
+Ja skrzypeczki swe wyjęłam<br>
+By na świat pokazać je<br>
+<br>
+Smyczek cienki miał niedługi<br>
+I pociągał raz po raz<br>
+Struna pękła ja zemdlałam<br>
+Bo to było pierwszy raz<br>
+Struna pękła ja zemdlałam<br>
+Bo to było pierwszy raz<br>                        
+                    </div>
+                </div>
+            </li>
+            
+            <li class="song-item">
+                <div class="song-title">A KTO SIĘ W STYCZNIU URODZIŁ</div>
+                <div class="song-content">
+                    <div class="song-text">
+A kto się w styczniu urodził<br> 
+Ma wstać, ma wstać, ma wstać<br> 
+Ma wziąć do ręki kielich swój<br> 
+I wypić aż do dna<br> 
+<br> 
+Jakżeś wypił, to se nalej<br> 
+A butelkę podaj dalej<br> 
+Jakżeś wypił, to se nalej<br> 
+A butelkę podaj dalej<br> 
+<br> 
+A kto się w lutym urodził<br> 
+Ma wstać, ma wstać, ma wstać<br> 
+Ma wziąć do ręki kielich swój<br> 
+I wypić aż do dna<br> 
+<br> 
+Jakżeś wypił, to se nalej<br> 
+A butelkę podaj dalej<br> 
+Jakżeś wypił, to se nalej<br> 
+A butelkę podaj dalej<br> 
+<br> 
+A kto się w marcu urodził<br> 
+Ma wstać, ma wstać, ma wstać<br> 
+Ma wziąć do ręki kielich swój<br> 
+I wypić aż do dna<br> 
+<br> 
+Jakżeś wypił, to se nalej<br> 
+A butelkę podaj dalej<br> 
+Jakżeś wypił, to se nalej<br> 
+A butelkę podaj dalej<br>
+("...")<br>                      
+                    </div>
+                </div>
+            </li>
+            
+            <li class="song-item">
+                <div class="song-title">GORZAŁKA ZAWSZE DOBRA JEST</div>
+                <div class="song-content">
+                    <div class="song-text">
+Gorzałka zawsze dobra jest<br>
+Gorzałka zawsze dobra jest<br>
+Bo ją piją gospodarze<br>
+I sprzedają za nią zboże<br>
+Gorzałka zawsze dobra jest<br>
+<br>
+Gorzałka zawsze dobra jest<br>
+Gorzałka zawsze dobra jest<br>
+Bo ją pije stara babka<br>
+Jak wypije hop do dziadka!<br>
+Gorzałka zawsze dobra jest<br>
+<br>
+Gorzałka zawsze dobra jest<br>
+Gorzałka zawsze dobra jest<br>
+Bo chłopacy ją pijają<br>
+Jak popiją to kochają<br>
+Gorzałka zawsze dobra jest<br>
+<br>
+Gorzałka zawsze dobra jest<br>
+Gorzałka zawsze dobra jest<br>
+Bo ją piją też artyści<br>
+Bo gorzałka gardła czyści<br>
+Gorzałka zawsze dobra jest<br>
+<br>
+Gorzałka zawsze dobra jest<br>
+Gorzałka zawsze dobra jest<br>
+Bo ją pije Franek Felek<br>
+I Polaków cały szereg<br>
+Gorzałka zawsze dobra jest<br>
+<br>
+Gorzałka zawsze dobra jest<br>
+Gorzałka zawsze dobra jest<br>
+Bo my także ją pijamy<br>
+Jak popijem dobrze gramy<br>
+Gorzałka zawsze dobra jest<br>                     
+                    </div>
+                </div>
+            </li>
+            
+            <li class="song-item">
+                <div class="song-title">CYGANECZKA ZOSIA</div>
+                <div class="song-content">
+                    <div class="song-text">
+Znalem Cyganeczkę Zosię,<br>
+kazali mi ją poślubić, hej!!!<br>
+Lecz me serce nie pozwala<br>
+mojej Cyganeczki lubić.<br>
+Lecz me serce nie pozwala<br>
+mojej Cyganeczki lubić.<br>
+<br>
+Na podwórzu, na podwórzu,<br>
+cztery kare konie stoją, hej!!!<br>
+Lecz ty, śliczna Cyganeczko,<br>
+nigdy już nie będziesz moją.<br>
+Lecz ty, śliczna Cyganeczko,<br>
+nigdy już nie będziesz moją.<br>
+<br>
+A jak mi się znudzi wreszcie,<br>
+kupię sobie konia w mieście, hej!!!<br>
+Kupię konia i aksamit<br>
+i pojadę z Cyganami.<br>
+Kupię konia i aksamit<br>
+i pojadę z Cyganami.<br>
+<br>
+Jadę w Polskę z taborami,<br>
+koniom grzywy wiatr rozwiewa, hej!!!<br>
+A ja jadę z Cyganami<br>
+i o Cyganeczce śpiewam.<br>
+A ja jadę z Cyganami<br>
+i o Cyganeczce śpiewam<br>                     
+                    </div>
+                </div>
+            </li>
+            
+            <li class="song-item">
+                <div class="song-title">ON ZIMNY, ONA GORĄCA</div>
+                <div class="song-content">
+                    <div class="song-text">
+On zimny, On zimny, ona gorąca<br>
+On nie chce, on niechce, ona go trąca<br>
+I prawą rączkę na niego kładzie<br>
+Ruszaj się, ruszaj się Ty stary dziadzie<br>
+I prawą rączkę na niego kładzie<br>
+Ruszaj się, ruszaj się Ty stary dziadzie<br>
+<br>
+On zimny, on zimny, ona gorąca<br>
+On nie chce, on niechce, ona go trąca<br>
+I lewą rączkę na niego kładzie<br>
+Ruszaj się, ruszaj się Ty stary dziadzie<br>
+I lewą rączkę na niego kładzie<br>
+Ruszaj się, ruszaj się Ty stary dziadzie<br>
+Ruszaj się, ruszaj się dziadzie<br>
+<br>
+On zimny, on zimny, ona gorąca<br>
+On nie chce, on niechce, ona go trąca<br>
+I prawą nóżkę na niego kładzie<br>
+Ruszaj się, ruszaj się Ty stary dziadzie<br>
+I prawą nóżkę na niego kładzie<br>
+Ruszaj się, ruszaj się Ty stary dziadzie<br>
+<br>
+On zimny, on zimny, ona gorąca<br>
+On nie chce, on niechce, ona go trąca<br>
+I lewą nóżkę na niego kładzie<br>
+Ruszaj się, ruszaj się Ty stary dziadzie<br>
+I lewą nóżkę na niego kładzie<br>
+Ruszaj się, ruszaj się Ty stary dziadzie<br>
+Ruszaj się, ruszaj się, Ty stary dziadzie<br>
+<br>
+On zimny, on zimny, ona gorąca<br>
+On nie chce, on niechce, ona go trąca<br>
+I całe ciało na niego kładzie<br>
+Ruszaj się, ruszaj się Ty stary dziadzie<br>
+I całe ciało na niego kładzie<br>
+Ruszaj się, ruszaj się Ty stary dziadzie<br>
+Ruszaj się, ruszaj się dziadzie<br>                        
+                    </div>
+                </div>
+            </li>
+            
+            <li class="song-item">
+                <div class="song-title">HEJ SOKÓŁY</div>
+                <div class="song-content">
+                    <div class="song-text">
+Hej, tam gdzieś znad czarnej wody<br>
+Siada na koń kozak młody,<br>
+Czule żegna się z dziewczyną,<br>
+Jeszcze czulej z Ukrainą.<br>
+<br>
+Hej, hej, hej sokoły<br>
+Omijajcie góry, lasy, doły,<br>
+Dzwoń, dzwoń, dzwoń dzwoneczku,<br>
+Mój stepowy skowroneczku,<br>
+<br>
+Hej, hej, hej sokoły<br>
+Omijajcie góry, lasy, doły,<br>
+Dzwoń, dzwoń, dzwoń dzwoneczku<br>
+Mój stepowy dzwoń, dzwoń, dzwoń!<br>
+<br>
+Pięknych dziewcząt jest niemało,<br>
+Lecz najwięcej w Ukrainie,<br>
+Tam me serce pozostało,<br>
+Przy kochanej mej dziewczynie.<br>
+Hej, hej…<br>
+<br>
+Ona biedna tam została,<br>
+Przepióreczka moja mała,<br>
+A ja tutaj w obcej stronie<br>
+Dniem i nocą tęsknię do niej.<br>
+Hej, hej…<br>
+<br>
+Żal, żal za dziewczyną,<br>
+Za zieloną Ukrainą,<br>
+Żal, żal serce płacze,<br>
+Że jej więcej nie zobaczę.<br>
+Hej, hej…<br>
+<br>
+Wina, wina, wina dajcie,<br>
+A jak umrę pochowajcie<br>
+Na zielonej Ukrainie<br>
+Przy kochanej mej dziewczynie.<br>
+Hej, hej…<br>
+                        
+                    </div>
+                </div>
+            </li>
+            
+            <li class="song-item">
+                <div class="song-title">WIŁA WIANKI</div>
+                <div class="song-content">
+                    <div class="song-text">
+Tam nad Wisłą, w dolinie siedziała dziewczyna<br>
+Była piękna jak różany kwiat<br>
+Tam nad Wisłą, w dolinie siedziała dziewczyna<br>
+Była piękna jak różany kwiat<br>
+Maki i róże zbierała sobie<br>
+Maki i róże zbierała sobie<br>
+<br>
+Wiła wianki i wrzucała je do falującej wody<br>
+Wiła wianki i wrzucała je do wody<br>
+Wiła wianki i wrzucała je do falującej wody<br>
+Wiła wianki i wrzucała je do wody<br>
+<br>
+A gdy ona nad Wisłą te wianki wiła<br>
+Przyszedł do niej żołnierzyk młody<br>
+A gdy ona nad Wisłą te wianki wiła<br>
+Przyszedł do niej żołnierzyk młody<br>
+Miła ach miła, tak rzecze do niej<br>
+Miła ach miła, tak rzecze do niej<br>
+<br>
+Wiła wianki i wrzucała je do falującej wody<br>
+Wiła wianki i wrzucała je do wody<br>
+Wiła wianki i wrzucała je do falującej wody<br>
+Wiła wianki i wrzucała je do wody<br>
+<br>
+Nie minęło już więcej niż dziewięć miesięcy<br>
+Siedzi ona nad Wisłą, płacze<br>
+Nie minęło już więcej niż dziewięć miesięcy<br>
+Siedzi ona nad Wisłą, płacze<br>
+Miłość ach miłość, zdradziłaś Ty mnie<br>
+Miłość ach miłość, zdradziłaś Ty mnie<br>
+<br>
+Wiła wianki i wrzucała je do falującej wody<br>
+Wiła wianki i wrzucała je do wody<br>
+Wiła wianki i wrzucała je do falującej wody<br>
+Wiła wianki i wrzucała je do wody<br>                   
+                    </div>
+                </div>
+            </li>
+            
+            <li class="song-item">
+                <div class="song-title">POLO SIĘ ROPCZYCE</div>
+                <div class="song-content">
+                    <div class="song-text">
+Siwy koń, siwy koń jeszcze nie siodłany,<br>
+daje mu dziewczyna owies podsiewany.<br>
+Chyba byś dziewczyno rozumu nie miała,<br>
+żebyś konisiowi owies podsiewała.<br>
+<br>
+Polo sie Ropczyce, aż sie popiół sypie,<br>
+jo se Ropczycanke popiołem posypie,<br>
+jo se Ropczycanke popiołem posypie.<br>
+<br>
+Szumiała leszczyna jak się rozwijała,<br>
+hej dziewczyna płakała jak się wydawała.<br>
+Nie szumże leszczyno i nie rozwijaj się,<br>
+nie płaczże dziewczyno i nie wydawaj się.<br>
+<br>
+Polo sie Ropczyce, aż sie popiół sypie,<br>
+jo se Ropczycanke popiołem posypie,<br>
+jo se Ropczycanke popiołem posypie.<br>
+<br>
+Ni ma to, ni ma to jak diabłowi w piekle,<br>
+łożre sie opije i leży se w cieple.<br>
+Księdzem być, księdzem być kozała mi mama,<br>
+żeby zakonnicą nie została sama.<br>
+<br>
+Polo sie Ropczyce, aż sie popiół sypie,<br>
+jo se Ropczycanke popiołem posypie,<br>
+jo se Ropczycanke popiołem posypie.<br>
+                    
+                    </div>
+                </div>
+            </li>
+            
+            <li class="song-item">
+                <div class="song-title">WOLNOŚĆ</div>
+                <div class="song-content">
+                    <div class="song-text">
+Miała matka syna, syna jedynego<br>
+Chciała go wychować na pana wielkiego<br>
+<br>
+Niech żyje wolność, wolność i swoboda<br>
+Niech żyje zabawa i dziewczyna młoda<br>
+Niech żyje wolność, wolność i swoboda<br>
+Niech żyje zabawa i dziewczyna młoda<br>
+<br>
+Jak go wychowała, wypielęgnowała<br>
+I do poprawczaka oddać go musiała<br>
+<br>
+Niech żyje wolność, wolność i swoboda<br>
+Niech żyje zabawa i dziewczyna młoda<br>
+Niech żyje wolność, wolność i swoboda<br>
+Niech żyje zabawa i dziewczyna młoda<br>
+<br>
+Jak go zabierali, muzyka mu grała<br>
+Ludziska się śmiali, dziewczyna płakała<br>
+<br>
+Niech żyje wolność, wolność i swoboda<br>
+Niech żyje zabawa i dziewczyna młoda<br>
+Niech żyje wolność, wolność i swoboda<br>
+Niech żyje zabawa i dziewczyna młoda<br>
+<br>
+Oj, wy, ludzie, ludzie, co wy tu robicie<br>
+Zabieracie chłopca mi na całe życie<br>
+<br>
+Niech żyje wolność, wolność i swoboda<br>
+Niech żyje zabawa i dziewczyna młoda<br>
+                    
+                    </div>
+                </div>
+            </li>
+            
+            <li class="song-item">
+                <div class="song-title">O MARIANNO</div>
+                <div class="song-content">
+                    <div class="song-text">
+Wczoraj obiecałaś mi na pewno<br>
+że zostaniesz mą królewną<br>
+królewną z mego snu<br>
+Wczoraj obiecałaś być mi wierną<br>
+i w miłości swej niezmienną<br>
+po długi życia kres<br>
+<br>
+O Marianno, gdybyś była zakochana<br>
+nie spałabyś w tę noc, w tę jedną noc<br>
+O Marianno, gdybyś była zakochana<br>
+nie spałabyś w tę noc, w tę jedną noc<br>
+<br>
+Dzisiaj, gdym do ciebie przyszedł z rana<br>
+by cię zbudzić, ukochana<br>
+z twego rannego snu<br>
+Dziś nie zastałem ciebie w domu<br>
+boś uciekła po kryjomu<br>
+z innym na randez vous<br>
+<br>
+O Marianno, gdybyś była zakochana<br>
+nie spałabyś w tę noc, w tę jedną noc<br>
+O Marianno, gdybyś była zakochana<br>
+nie spałabyś w tę noc, w tę jedną noc<br>
+<br>
+Teraz, gdy już wszystko diabli wzięli<br>
+mnie do wojska zaciągnęli<br>
+karabin dali mi<br>
+Dzisiaj mam już ukochaną<br>
+karabinem nazywaną<br>
+z nią spędzam randez vous<br>
+<br>
+O Marianno, gdybyś była zakochana<br>
+nie spałabyś w tę noc, w tę jedną noc<br>
+O Marianno, gdybyś była zakochana<br>
+nie spałabyś w tę noc, w tę jedną noc<br>
+                    </div>
+                </div>
+            </li>
+            
+            <li class="song-item">
+                <div class="song-title">SZŁA DZIEWECZKA</div>
+                <div class="song-content">
+                    <div class="song-text">
+Szła dzieweczka do laseczka do zielonego<br>
+Do zielonego do zielonego<br>
+Napotkała myśliweczka bardzo szwarnego<br>
+Bardzo szwarnego bardzo szwarnego<br>
+<br>
+Gdzie jest ta ulica, gdzie jest ten dom<br>
+Gdzie jest ta dziewczyna, co kocham ją<br>
+Znalazłem ulicę, znalazłem dom<br>
+Znalazłem dziewczynę, co kocham ją<br>
+<br>
+Myśliweczku, kochaneczku bardzom ci rada<br>
+Bardzom ci rada bardzom ci rada<br>
+Dałabym ci chleba z masłem, alem go zjadła<br>
+Alem go zjadła alem go zjadła<br>
+<br>
+Gdzie jest ta ulica, gdzie jest ten dom<br>
+Gdzie jest ta dziewczyna, co kocham ją<br>
+Znalazłem ulicę, znalazłem dom<br>
+Znalazłem dziewczynę, co kocham ją<br>
+<br>
+Jakżeś zjadła, tożeś zjadła, to mi się nie chwal<br>
+To mi się nie chwal to mi się nie chwal<br>
+Bo jakbym cię wcześniej spotkał, to bym ci zabrał<br>
+To bym ci zabrał to bym ci zabrał<br>
+<br>
+Gdzie jest ta ulica, gdzie jest ten dom<br>
+Gdzie jest ta dziewczyna, co kocham ją<br>
+Znalazłem ulicę, znalazłem dom<br>
+Znalazłem dziewczynę, co kocham ją<br>                  
+                    </div>
+                </div>
+            </li>
+            
+            <li class="song-item">
+                <div class="song-title">CZTERY RAZY PO DWA RAZY</div>
+                <div class="song-content">
+                    <div class="song-text">
+Czy normalna zdrowa rybka<br>
+może zgwałcić wielorybka<br>
+Ależ owszem czemu<br>
+nie Rybce też należy się<br>
+<br>
+Cztery razy po dwa razy<br>
+osiem razy raz po raz<br>
+O północy ze dwa razy<br>
+i nad ranem jeszcze raz<br>
+<br>
+Czy normalna koza z bródką<br>
+może zostać prostytutką<br>
+Ależ owszem czemu nie<br>
+kozie też należy się.<br>
+<br>
+Cztery razy po dwa razy<br>
+osiem razy raz po raz<br>
+O północy ze dwa razy<br>
+i nad ranem jeszcze raz<br>
+<br>
+Czy normalnej zdrowej pannie<br>
+można zrobić dziecko w wannie<br>
+Ależ owszem czemu nie<br>
+pannie też należy się<br>
+<br>
+Cztery razy po dwa razy<br>
+osiem razy raz po raz<br>
+O północy ze dwa razy<br>
+i nad ranem jeszcze raz<br>
+<br>
+Czy normalny dziadek z bródką<br>
+może sobie z prostytutką<br>
+Ależ owszem czemu nie<br>
+jemu też należy się<br>
+<br>
+Cztery razy po dwa razy<br>
+osiem razy raz po raz<br>
+O północy ze dwa razy<br>
+i nad ranem jeszcze raz<br>
+<br>
+Czy normalny zdrowy zając<br>
+może zgwałcić uciekając<br>
+Ależ owszem czemu nie<br>
+jemu też należy się<br>
+<br>
+Cztery razy po dwa razy<br>
+osiem razy raz po raz<br>
+O północy ze dwa razy<br>
+i nad ranem jeszcze raz<br>
+                       
+                    </div>
+                </div>
+            </li>
+            
+            <li class="song-item">
+                <div class="song-title">FAJDULI</div>
+                <div class="song-content">
+                    <div class="song-text">
+Jestem sobie krakowianka,<br>
+Faj duli, faj duli, taj,<br>
+Mam fartuszek po kolanka,<br>
+Faj duli, faj duli, faj.<br>
+<br>
+A spódniczkę jeszcze wyżej,<br>
+Faj duli, faj duli, faj,<br>
+Żeby chłopcom było bliżej,<br>
+Faj duli, faj duli, faj.<br>
+<br>
+Kiedy idę do kościoła,<br>
+Faj duli, faj duli, faj,<br>
+Pełno chłopców za mną woła,<br>
+Faj duli, faj duli, faj.<br>
+<br>
+Na jednego mrugnę oczkiem,<br>
+Faj duli, faj duli, Taj,<br>
+A drugiego trącę boczkiem<br>
+Faj duli, faj duli, faj.<br>
+<br>
+Z trzecim pójdę w krakowiaka,<br>
+Faj duli, faj duli, faj,<br>
+A czwartemu dam buziaka,<br>
+Faj duli, faj duli, faj.<br>
+<br>
+Z piątym pójdę do kawiarni,<br>
+Faj duli, faj duli, faj,<br>
+Z szóstym pójdę do sypialni<br>
+Faj duli, faj duli, faj.<br>
+<br>
+Jestem sobie krakowianka,<br>
+Faj duli, faj duli, faj,<br>
+Mam fartuszek, nie mam wianka,<br>
+Faj duli, faj duli, faj.<br>
+                    </div>
+                </div>
+            </li>
+            
+            <li class="song-item">
+                <div class="song-title">ZIELONE WŁOSKIE ORZECHY</div>
+                <div class="song-content">
+                    <div class="song-text">
+Zielone włoskie orzechy,<br>
+zielone włoskie orzechy,<br>
+nie ma z baciara pociechy,<br>
+nie ma z baciara pociechy.<br>
+<br>
+Bo Baciar pije tańcuje,<br>
+bo baciar pije tańcuje,<br>
+jak przyjdzie nocka wędruje,<br>
+jak przyjdzie nocka wędruje.<br>
+<br>
+Koszula na nim stargano,<br>
+koszula na nim stargano,<br>
+cztery niedziele nie prano,<br>
+cztery niedziele nie prano.<br>
+<br>
+Cztery niedziele dziś piąto,<br>
+cztery niedziele dziś piąto,<br>
+przez tą baciarke przeklętą,<br>
+przez tą baciarke przeklętą.<br>
+<br>
+Ale to wszystko się zmieni,<br>
+ale to wszystko się zmieni,<br>
+bo się nam baciar ożenił,<br>
+bo się nam baciar ożenił.<br>
+                    </div>
+                </div>
+            </li>
+            
+            <li class="song-item">
+                <div class="song-title">MANDACIK</div>
+                <div class="song-content">
+                    <div class="song-text">
+Wręczę Ci mandacik za przekroczenie piękności<br>
+Możesz go opłacić walutą miłości<br>
+Wręczę Ci mandacik za przekroczenie piękności<br>
+Możesz go opłacić w zupełnej ciemności<br>
+<br>
+Mała, Twe spojrzenie to jest pierwsze wykroczenie<br>
+Twoja aparycja, dominacja genetyczna<br>
+I chociaż za te sensualne ruchy przybiłbym Ci sto lat puchy<br>
+Mam zamiary dać najniższy wymiar kary<br>
+<br>
+Wręczę Ci mandacik za przekroczenie piękności<br>
+Możesz go opłacić walutą miłości<br>
+Wręczę Ci mandacik za przekroczenie piękności<br>
+Możesz go opłacić w zupełnej ciemności<br>
+<br>
+Przez otwarte okno Twego Clio usłyszałaś: io-io<br>
+To w miłosny pościg się rzucili chłopcy radarowcy<br>
+A kiedy robisz swoje słodkie minki na radyjku pytają mobilki<br>
+Jak tam dróżka do serduszka tej dziewczynki<br>
+<br>
+Wręczę Ci mandacik za przekroczenie piękności<br>
+Możesz go opłacić walutą miłości<br>
+Wręczę Ci mandacik za przekroczenie piękności<br>
+Możesz go opłacić w zupełnej ciemności<br>
+<br>                      
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div>
 
     <script>
-        // Buttons are now ready for navigation
-        // You can add href attributes to link to actual pages
+        document.addEventListener('DOMContentLoaded', function() {
+            const songItems = document.querySelectorAll('.song-item');
+            
+            songItems.forEach(item => {
+                const title = item.querySelector('.song-title');
+                
+                title.addEventListener('click', function() {
+                    // Close all other items
+                    songItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+        });
     </script>
 </body>
 </html>
